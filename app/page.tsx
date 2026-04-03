@@ -2,9 +2,22 @@
 
 import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
+import type { Variants } from "framer-motion";
+import type { ReactNode } from "react";
 import { brand, contacts, processSteps, principles, services } from "./business";
 
-const heroSignals = [
+type HeroSignal = {
+  title: string;
+  detail: string;
+};
+
+type CapabilityCard = {
+  label: string;
+  title: string;
+  detail: string;
+};
+
+const heroSignals: HeroSignal[] = [
   {
     title: "Security-first baseline",
     detail:
@@ -24,10 +37,10 @@ const heroSignals = [
 
 const sectionTransition = {
   duration: 0.62,
-  ease: [0.22, 1, 0.36, 1] as const,
+  ease: "easeOut",
 };
 
-const staggerContainer = {
+const staggerContainer: Variants = {
   hidden: {},
   show: {
     transition: {
@@ -36,7 +49,7 @@ const staggerContainer = {
   },
 };
 
-const fadeUp = {
+const fadeUp: Variants = {
   hidden: { opacity: 0, y: 24 },
   show: {
     opacity: 1,
@@ -45,7 +58,7 @@ const fadeUp = {
   },
 };
 
-function SectionEyebrow({ children }: { children: React.ReactNode }) {
+function SectionEyebrow({ children }: { children: ReactNode }) {
   return (
     <p className="heading-tech text-[11px] uppercase tracking-[0.24em] text-[var(--accent-soft)]">
       {children}
@@ -55,6 +68,18 @@ function SectionEyebrow({ children }: { children: React.ReactNode }) {
 
 export default function HomePage() {
   const reducedMotion = useReducedMotion();
+  const capabilityCards: CapabilityCard[] =
+    services.length > 0
+      ? services.map((service) => ({
+          label: "Verified Service",
+          title: service.name,
+          detail: service.summary,
+        }))
+      : processSteps.map((step) => ({
+          label: "Delivery Stage",
+          title: step.stage.replace(/^\d+\s*\/\/\s*/, ""),
+          detail: step.description,
+        }));
 
   return (
     <main className="relative overflow-hidden pb-10 sm:pb-14">
@@ -140,7 +165,7 @@ export default function HomePage() {
                   ? undefined
                   : {
                       duration: 6.5,
-                      repeat: Number.POSITIVE_INFINITY,
+                      repeat: Infinity,
                       ease: "easeInOut",
                     }
               }
@@ -347,20 +372,7 @@ export default function HomePage() {
           </motion.div>
 
           <motion.div variants={fadeUp} className="grid gap-4 md:grid-cols-2">
-            {(services.length > 0
-              ? services.map((service) => ({
-                  label: "Verified Service",
-                  title: service.name,
-                  detail: service.summary,
-                }))
-              : processSteps.map((step) => ({
-                  label: "Delivery Stage",
-                  title: step.stage.replace(/^\d+\s*\/\/\s*/, ""),
-                  detail: step.description,
-                }))
-            )
-              .slice(0, 4)
-              .map((card, index) => {
+            {capabilityCards.slice(0, 4).map((card, index) => {
                 const emphasized = index === 0 || index === 3;
 
                 return (
