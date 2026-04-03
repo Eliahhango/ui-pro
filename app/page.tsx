@@ -1,161 +1,161 @@
-"use client";
+import Link from "next/link";
+import { Reveal } from "./components/reveal";
+import { brand, contacts, processSteps, principles, services } from "./business";
 
-import { motion, useReducedMotion } from "framer-motion";
-import type { Variants } from "framer-motion";
-import { brand, contacts, services } from "./business";
-
-const container: Variants = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.08,
-      delayChildren: 0.12,
-    },
-  },
-};
-
-const item: Variants = {
-  hidden: { opacity: 0, y: 10 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.45,
-      ease: [0.22, 1, 0.36, 1],
-    },
-  },
-};
-
-export default function Home() {
-  const reducedMotion = useReducedMotion();
-
-  const motionProps = reducedMotion
-    ? { initial: false, animate: {} }
-    : { initial: "hidden", animate: "show" };
-
+export default function HomePage() {
   return (
-    <main className="relative overflow-hidden pb-16">
+    <main className="relative overflow-hidden pb-6">
       <div className="grid-overlay" />
 
-      <motion.section
-        className="container-frame pt-8 sm:pt-14"
-        variants={container}
-        {...motionProps}
-      >
-        <motion.div
-          variants={item}
-          className="panel rounded-3xl p-6 sm:p-8 lg:p-10"
-        >
-          <div className="mb-8 flex items-center justify-between gap-4">
-            <p className="heading-tech text-xs uppercase text-[var(--accent-soft)]">
-              Elitechwiz // Strategic Technology Unit
-            </p>
-            <div className="h-2 w-2 rounded-full bg-[var(--accent)] shadow-[0_0_18px_rgba(67,217,189,0.9)]" />
+      <section className="container-frame pt-8 sm:pt-12">
+        <Reveal className="panel rounded-3xl p-6 sm:p-9 lg:p-12">
+          <p className="heading-tech text-xs uppercase tracking-[0.16em] text-[var(--accent-soft)]">
+            Enterprise Delivery Unit
+          </p>
+          <h1 className="heading-tech mt-4 max-w-4xl text-4xl leading-tight text-white sm:text-5xl lg:text-6xl">
+            {brand.name}
+          </h1>
+          <p className="mt-5 max-w-3xl text-sm leading-7 text-[var(--muted)] sm:text-base">
+            {brand.positioning}
+          </p>
+
+          <div className="mt-8 flex flex-wrap gap-3">
+            <Link
+              href="/contact"
+              className="heading-tech rounded-lg border border-[var(--line)] bg-[rgba(67,217,189,0.1)] px-4 py-3 text-xs uppercase tracking-[0.16em] text-[var(--accent-soft)] transition-colors duration-200 hover:bg-[rgba(67,217,189,0.18)]"
+            >
+              Start Engagement
+            </Link>
+            <Link
+              href="/services"
+              className="heading-tech rounded-lg border border-[var(--line)] px-4 py-3 text-xs uppercase tracking-[0.16em] text-[var(--gold)] transition-colors duration-200 hover:bg-[rgba(202,138,4,0.08)]"
+            >
+              Review Services
+            </Link>
           </div>
+        </Reveal>
+      </section>
 
-          <div className="grid gap-10 lg:grid-cols-[1.2fr_0.8fr]">
-            <motion.div variants={item}>
-              <h1 className="heading-tech text-4xl leading-tight text-white sm:text-5xl lg:text-6xl">
-                {brand.name}
-              </h1>
-              <p className="mt-5 max-w-2xl text-sm leading-7 text-[var(--muted)] sm:text-base">
-                {brand.positioning}
-              </p>
-            </motion.div>
-
-            <motion.div variants={item} className="panel rounded-2xl p-5">
-              <p className="heading-tech text-xs uppercase tracking-[0.16em] text-[var(--gold)]">
-                Contact Channel
-              </p>
-
-              {contacts.length > 0 ? (
-                <ul className="mt-5 space-y-3 text-sm text-[var(--muted)]">
-                  {contacts.map((contact) => (
-                    <li key={contact.href}>
-                      <a
-                        href={contact.href}
-                        className="group inline-flex items-center gap-3 transition-colors duration-200 hover:text-white"
-                      >
-                        <span className="heading-tech text-[10px] uppercase tracking-[0.14em] text-[var(--accent-soft)]">
-                          {contact.label}
-                        </span>
-                        <span>{contact.value}</span>
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              ) : (
-                <p className="mt-5 text-sm leading-6 text-[var(--muted)]">
-                  No verified contact details were found in this repository.
-                  Add them in app/business.ts.
-                </p>
-              )}
-            </motion.div>
-          </div>
-        </motion.div>
-      </motion.section>
-
-      <motion.section
-        className="container-frame mt-8"
-        variants={container}
-        {...motionProps}
-      >
-        <motion.div variants={item} className="panel rounded-3xl p-6 sm:p-8 lg:p-10">
-          <div className="mb-8 flex items-end justify-between gap-6">
+      <section className="container-frame mt-8">
+        <Reveal className="panel rounded-3xl p-6 sm:p-8 lg:p-10">
+          <div className="mb-6 flex items-end justify-between gap-6">
             <div>
               <p className="heading-tech text-xs uppercase tracking-[0.16em] text-[var(--accent-soft)]">
-                Service Matrix
+                Core Services
               </p>
               <h2 className="heading-tech mt-3 text-2xl text-white sm:text-3xl">
-                Verified service inventory
+                Implementation scope
               </h2>
             </div>
+            <Link
+              href="/services"
+              className="text-xs uppercase tracking-[0.16em] text-[var(--muted)] transition-colors hover:text-white"
+            >
+              Full list
+            </Link>
           </div>
 
           {services.length > 0 ? (
             <div className="grid gap-4 md:grid-cols-2">
-              {services.map((service) => (
-                <motion.article
-                  key={service.name}
-                  whileHover={reducedMotion ? undefined : { y: -4 }}
-                  transition={{ duration: 0.2 }}
-                  className="panel rounded-2xl p-5"
-                >
+              {services.slice(0, 4).map((service) => (
+                <article key={service.name} className="panel rounded-2xl p-5">
                   <h3 className="heading-tech text-lg text-white">{service.name}</h3>
                   <p className="mt-3 text-sm leading-6 text-[var(--muted)]">
                     {service.summary}
                   </p>
-                </motion.article>
+                </article>
               ))}
             </div>
           ) : (
             <div className="panel rounded-2xl p-6">
               <p className="text-sm leading-7 text-[var(--muted)]">
-                No verified services were found in the existing project content.
-                Add your real services in app/business.ts and they will render here automatically.
+                Real services are not configured yet. Add your verified service list in app/business.ts to populate this section.
               </p>
             </div>
           )}
-        </motion.div>
-      </motion.section>
+        </Reveal>
+      </section>
 
-      <motion.section
-        className="container-frame mt-8"
-        variants={container}
-        {...motionProps}
-      >
-        <motion.div variants={item} className="panel rounded-3xl p-6 sm:p-8">
+      <section className="container-frame mt-8">
+        <Reveal className="panel rounded-3xl p-6 sm:p-8 lg:p-10">
           <p className="heading-tech text-xs uppercase tracking-[0.16em] text-[var(--gold)]">
-            Operating Protocol
+            Delivery Principles
           </p>
-          <p className="mt-4 max-w-3xl text-sm leading-7 text-[var(--muted)] sm:text-base">
-            This site is intentionally minimal and confidence-led: no fabricated
-            testimonials, no invented metrics, and no decorative clutter. It is
-            built to scale from verified business facts only.
+          <div className="mt-5 grid gap-4 md:grid-cols-2">
+            {principles.map((principle) => (
+              <article key={principle.title} className="panel rounded-2xl p-5">
+                <h3 className="heading-tech text-base text-white">{principle.title}</h3>
+                <p className="mt-3 text-sm leading-6 text-[var(--muted)]">
+                  {principle.detail}
+                </p>
+              </article>
+            ))}
+          </div>
+        </Reveal>
+      </section>
+
+      <section className="container-frame mt-8">
+        <Reveal className="panel rounded-3xl p-6 sm:p-8 lg:p-10">
+          <div className="mb-6 flex items-end justify-between gap-6">
+            <div>
+              <p className="heading-tech text-xs uppercase tracking-[0.16em] text-[var(--accent-soft)]">
+                Operating Flow
+              </p>
+              <h2 className="heading-tech mt-3 text-2xl text-white sm:text-3xl">
+                Project lifecycle
+              </h2>
+            </div>
+            <Link
+              href="/process"
+              className="text-xs uppercase tracking-[0.16em] text-[var(--muted)] transition-colors hover:text-white"
+            >
+              View process page
+            </Link>
+          </div>
+
+          <div className="grid gap-4 md:grid-cols-2">
+            {processSteps.slice(0, 2).map((step) => (
+              <article key={step.stage} className="panel rounded-2xl p-5">
+                <p className="heading-tech text-xs uppercase tracking-[0.16em] text-[var(--gold)]">
+                  {step.stage}
+                </p>
+                <p className="mt-3 text-sm leading-6 text-[var(--muted)]">
+                  {step.description}
+                </p>
+              </article>
+            ))}
+          </div>
+        </Reveal>
+      </section>
+
+      <section className="container-frame mt-8">
+        <Reveal className="panel rounded-3xl p-6 sm:p-8">
+          <p className="heading-tech text-xs uppercase tracking-[0.16em] text-[var(--gold)]">
+            Contact Channel
           </p>
-        </motion.div>
-      </motion.section>
+          {contacts.length > 0 ? (
+            <ul className="mt-5 grid gap-3 text-sm text-[var(--muted)] sm:grid-cols-2">
+              {contacts.map((contact) => (
+                <li key={contact.href}>
+                  <a
+                    href={contact.href}
+                    className="panel block rounded-xl p-4 transition-colors duration-200 hover:text-white"
+                  >
+                    <p className="heading-tech text-[10px] uppercase tracking-[0.16em] text-[var(--accent-soft)]">
+                      {contact.label}
+                    </p>
+                    <p className="mt-1">{contact.value}</p>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className="mt-4 text-sm leading-7 text-[var(--muted)]">
+              No verified contact details found yet. Add real contact information in app/business.ts.
+            </p>
+          )}
+        </Reveal>
+      </section>
     </main>
   );
 }

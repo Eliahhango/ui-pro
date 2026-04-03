@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Fira_Code, Share_Tech_Mono } from "next/font/google";
 import "./globals.css";
+import { SiteFooter } from "./components/site-footer";
+import { SiteHeader } from "./components/site-header";
 
 const bodyFont = Fira_Code({
   variable: "--font-body",
@@ -29,7 +31,11 @@ export default function RootLayout({
       lang="en"
       className={`${bodyFont.variable} ${headingFont.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <SiteHeader />
+        <div className="flex-1">{children}</div>
+        <SiteFooter />
+      </body>
     </html>
   );
 }
