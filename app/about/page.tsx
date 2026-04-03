@@ -11,7 +11,7 @@ export default function AboutPage() {
           <p className="heading-tech text-xs uppercase tracking-[0.16em] text-[var(--accent-soft)]">
             About
           </p>
-          <h1 className="heading-tech mt-4 text-4xl leading-tight text-white sm:text-5xl">
+          <h1 className="heading-tech mt-4 text-4xl leading-tight text-[var(--foreground)] sm:text-5xl">
             Strategic technology partner
           </h1>
           <p className="mt-5 max-w-3xl text-sm leading-7 text-[var(--muted)] sm:text-base">
@@ -28,7 +28,7 @@ export default function AboutPage() {
           <div className="mt-5 grid gap-4 md:grid-cols-2">
             {principles.map((principle) => (
               <article key={principle.title} className="panel rounded-2xl p-5">
-                <h2 className="heading-tech text-lg text-white">{principle.title}</h2>
+                <h2 className="heading-tech text-lg text-[var(--foreground)]">{principle.title}</h2>
                 <p className="mt-3 text-sm leading-6 text-[var(--muted)]">
                   {principle.detail}
                 </p>

@@ -1,18 +1,17 @@
 import type { Metadata } from "next";
-import { Fira_Code, Share_Tech_Mono } from "next/font/google";
+import { DM_Sans, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import { SiteFooter } from "./components/site-footer";
 import { SiteHeader } from "./components/site-header";
 
-const bodyFont = Fira_Code({
+const bodyFont = DM_Sans({
   variable: "--font-body",
   subsets: ["latin"],
 });
 
-const headingFont = Share_Tech_Mono({
+const headingFont = Space_Grotesk({
   variable: "--font-heading",
   subsets: ["latin"],
-  weight: "400",
 });
 
 export const metadata: Metadata = {

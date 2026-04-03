@@ -11,7 +11,7 @@ export default function ContactPage() {
           <p className="heading-tech text-xs uppercase tracking-[0.16em] text-[var(--accent-soft)]">
             Contact
           </p>
-          <h1 className="heading-tech mt-4 text-4xl leading-tight text-white sm:text-5xl">
+          <h1 className="heading-tech mt-4 text-4xl leading-tight text-[var(--foreground)] sm:text-5xl">
             Start a focused engagement
           </h1>
           <p className="mt-5 max-w-3xl text-sm leading-7 text-[var(--muted)] sm:text-base">
@@ -28,7 +28,7 @@ export default function ContactPage() {
                 <li key={contact.href}>
                   <a
                     href={contact.href}
-                    className="panel block rounded-2xl p-5 transition-colors duration-200 hover:text-white"
+                    className="panel block rounded-2xl p-5 transition-colors duration-200 hover:border-[var(--accent)]"
                   >
                     <p className="heading-tech text-xs uppercase tracking-[0.16em] text-[var(--accent-soft)]">
                       {contact.label}

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Reveal } from "../components/reveal";
-import { services } from "../business";
+import { processSteps, services } from "../business";
 
 export default function ServicesPage() {
   return (
@@ -12,7 +12,7 @@ export default function ServicesPage() {
           <p className="heading-tech text-xs uppercase tracking-[0.16em] text-[var(--accent-soft)]">
             Services
           </p>
-          <h1 className="heading-tech mt-4 text-4xl leading-tight text-white sm:text-5xl">
+          <h1 className="heading-tech mt-4 text-4xl leading-tight text-[var(--foreground)] sm:text-5xl">
             Capability portfolio
           </h1>
           <p className="mt-5 max-w-3xl text-sm leading-7 text-[var(--muted)] sm:text-base">
@@ -27,7 +27,7 @@ export default function ServicesPage() {
             <div className="grid gap-4 md:grid-cols-2">
               {services.map((service) => (
                 <article key={service.name} className="panel rounded-2xl p-5">
-                  <h2 className="heading-tech text-lg text-white">{service.name}</h2>
+                  <h2 className="heading-tech text-lg text-[var(--foreground)]">{service.name}</h2>
                   <p className="mt-3 text-sm leading-6 text-[var(--muted)]">
                     {service.summary}
                   </p>
@@ -35,17 +35,22 @@ export default function ServicesPage() {
               ))}
             </div>
           ) : (
-            <div className="panel rounded-2xl p-6">
-              <p className="text-sm leading-7 text-[var(--muted)]">
-                Real service data is not configured yet. Add verified services in app/business.ts to finalize this page.
-              </p>
+            <div className="grid gap-4 md:grid-cols-2">
+              {processSteps.map((step) => (
+                <article key={step.stage} className="panel rounded-2xl p-5">
+                  <p className="heading-tech text-xs uppercase tracking-[0.16em] text-[var(--gold)]">
+                    {step.stage}
+                  </p>
+                  <p className="mt-3 text-sm leading-6 text-[var(--muted)]">{step.description}</p>
+                </article>
+              ))}
             </div>
           )}
 
           <div className="mt-8">
             <Link
               href="/contact"
-              className="heading-tech inline-flex rounded-lg border border-[var(--line)] px-4 py-3 text-xs uppercase tracking-[0.16em] text-[var(--gold)] transition-colors duration-200 hover:bg-[rgba(202,138,4,0.08)]"
+              className="heading-tech inline-flex rounded-full bg-[var(--accent)] px-4 py-3 text-xs uppercase tracking-[0.16em] text-white transition-colors duration-200 hover:bg-[var(--accent-strong)]"
             >
               Discuss scope
             </Link>

@@ -11,7 +11,7 @@ export default function ProcessPage() {
           <p className="heading-tech text-xs uppercase tracking-[0.16em] text-[var(--accent-soft)]">
             Process
           </p>
-          <h1 className="heading-tech mt-4 text-4xl leading-tight text-white sm:text-5xl">
+          <h1 className="heading-tech mt-4 text-4xl leading-tight text-[var(--foreground)] sm:text-5xl">
             Controlled delivery lifecycle
           </h1>
           <p className="mt-5 max-w-3xl text-sm leading-7 text-[var(--muted)] sm:text-base">
